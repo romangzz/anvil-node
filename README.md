@@ -24,15 +24,68 @@ You can override these defaults by setting environment variables as described be
 
 ## Environment Variables
 
-The following environment variables allow you to customize the Anvil node:
+| Environment Variable                 | Default Value   | Description                                                       | Category                    |
+| ------------------------------------ | --------------- | ----------------------------------------------------------------- | --------------------------- |
+| **ACCOUNTS**                         | 10              | Number of accounts to generate                                    | General Options             |
+| **AUTO_IMPERSONATE**                 | (empty)         | If set to "true", automatically impersonate addresses             | General Options             |
+| **BLOCK_TIME**                       | (empty)         | Time interval (in seconds) between blocks                         | General Options             |
+| **BALANCE**                          | 10000           | Initial balance (in wei, gwei, etc.) assigned to each account     | General Options             |
+| **CONFIG_OUT**                       | (empty)         | File path to write out configuration settings                     | General Options             |
+| **DERIVATION_PATH**                  | m/44'/60'/0'/0/ | HD wallet derivation path for generating accounts                 | General Options             |
+| **DUMP_STATE**                       | (empty)         | File path to dump the current state                               | General Options             |
+| **HARD_FORK**                        | latest          | Ethereum hard fork version to simulate (e.g., "london", "berlin") | General Options             |
+| **INIT_GENESIS**                     | (empty)         | File path for initializing genesis state                          | General Options             |
+| **IPC**                              | (empty)         | File path for the IPC socket                                      | General Options             |
+| **LOAD_STATE**                       | (empty)         | File path to load a previously dumped state                       | General Options             |
+| **MNEMONIC**                         | (empty)         | Mnemonic phrase used for generating deterministic accounts        | General Options             |
+| **MNEMONIC_RANDOM**                  | (empty)         | When set, generates a random mnemonic                             | General Options             |
+| **MNEMONIC_SEED_UNSAFE**             | (empty)         | Unsafe mnemonic seed (use with caution)                           | General Options             |
+| **MAX_PERSISTED_STATES**             | (empty)         | Maximum number of states to persist (if state-dumping is enabled) | General Options             |
+| **MIXED_MINING**                     | (empty)         | Enables mixed mining mode when set to "true"                      | General Options             |
+| **NO_MINING**                        | (empty)         | Disables mining if set to "true"                                  | General Options             |
+| **ORDER**                            | fees            | Transaction ordering strategy (e.g., by fees)                     | General Options             |
+| **PORT**                             | 8545            | Port for the RPC server                                           | General Options             |
+| **PRESERVE_HISTORICAL_STATES**       | (empty)         | Preserves historical states if set to "true"                      | General Options             |
+| **PRUNE_HISTORY**                    | (empty)         | Prunes old transaction history if set to "true"                   | General Options             |
+| **STATE_INTERVAL**                   | (empty)         | Interval for taking state snapshots                               | General Options             |
+| **STATE**                            | (empty)         | Specifies the initial state configuration                         | General Options             |
+| **TIMESTAMP**                        | (empty)         | Overrides the block timestamp                                     | General Options             |
+| **TRANSACTION_BLOCK_KEEPER**         | (empty)         | Enables a transaction block keeper for state management           | General Options             |
+| **VERSION**                          | (empty)         | Version information (typically used for debugging)                | General Options             |
+| **ALLOW_ORIGIN**                     | *               | Allowed origins for Cross-Origin Resource Sharing (CORS)          | Server Options              |
+| **HOST**                             | 0.0.0.0         | Host address on which the RPC server listens                      | Server Options              |
+| **NO_CORS**                          | (empty)         | Disables CORS if set to "true"                                    | Server Options              |
+| **NO_REQUEST_SIZE_LIMIT**            | (empty)         | Disables the request size limit if set to "true"                  | Server Options              |
+| **COMPUTE_UNITS_PER_SECOND**         | 330             | Compute units per second used for gas estimation                  | Forking Options             |
+| **FORK_URL**                         | (empty)         | URL of the blockchain node to fork from                           | Forking Options             |
+| **FORK_BLOCK_NUMBER**                | (empty)         | Specific block number to fork from                                | Forking Options             |
+| **FORK_CHAIN_ID**                    | (empty)         | Chain ID of the network to fork                                   | Forking Options             |
+| **FORK_HEADER**                      | (empty)         | Additional header options for forking                             | Forking Options             |
+| **FORK_RETRY_BACKOFF**               | (empty)         | Duration to wait before retrying a failed fork connection         | Forking Options             |
+| **FORK_TRANSACTION_HASH**            | (empty)         | Specific transaction hash to fork from                            | Forking Options             |
+| **NO_RATE_LIMIT**                    | (empty)         | Disables rate limiting if set to "true"                           | Forking Options             |
+| **NO_STORAGE_CACHING**               | (empty)         | Disables storage caching if set to "true"                         | Forking Options             |
+| **RETRIES**                          | 5               | Number of retry attempts for fork connections                     | Forking Options             |
+| **TIMEOUT**                          | 45000           | Request timeout in milliseconds                                   | Forking Options             |
+| **BASE_FEE**                         | (empty)         | Base fee per gas unit (used for block fee calculations)           | Executor Environment Config |
+| **CHAIN_ID**                         | 31337           | Chain ID for the simulated blockchain                             | Executor Environment Config |
+| **CODE_SIZE_LIMIT**                  | (empty)         | Maximum allowed contract code size                                | Executor Environment Config |
+| **DISABLE_BLOCK_GAS_LIMIT**          | (empty)         | Disables the block gas limit if set to "true"                     | Executor Environment Config |
+| **DISABLE_CODE_SIZE_LIMIT**          | (empty)         | Disables the contract code size limit if set to "true"            | Executor Environment Config |
+| **DISABLE_MIN_PRIORITY_FEE**         | (empty)         | Disables the minimum priority fee if set to "true"                | Executor Environment Config |
+| **GAS_LIMIT**                        | (empty)         | Default gas limit per block                                       | Executor Environment Config |
+| **GAS_PRICE**                        | (empty)         | Default gas price                                                 | Executor Environment Config |
+| **ALPHANET**                         | (empty)         | Enables Alphanet mode if set to "true"                            | EVM Options                 |
+| **AUTO_UNLOCK**                      | (empty)         | Automatically unlocks accounts if set to "true"                   | EVM Options                 |
+| **DISABLE_CONSOLE_LOG**              | (empty)         | Disables console logging if set to "true"                         | EVM Options                 |
+| **DISABLE_DEFAULT_CREATE2_DEPLOYER** | (empty)         | Disables the default CREATE2 deployer if set to "true"            | EVM Options                 |
+| **MEMORY_LIMIT**                     | (empty)         | Memory limit allocated for the EVM                                | EVM Options                 |
+| **OPTIMISM**                         | (empty)         | Enables Optimism mode if set to "true"                            | EVM Options                 |
+| **STEPS_TRACING**                    | (empty)         | Enables detailed step tracing if set to "true"                    | EVM Options                 |
+| **JSON_LOGS**                        | (empty)         | Outputs logs in JSON format if set to "true"                      | Display Options             |
+| **QUIET_MODE**                       | (empty)         | Minimizes output if set to "true"                                 | Display Options             |
+| **VERBOSE_MODE**                     | (empty)         | Increases logging verbosity if set to "true"                      | Display Options             |
 
-| Variable     | Description                                | Default Value                                                   |
-| ------------ | ------------------------------------------ | --------------------------------------------------------------- |
-| `CHAIN_ID`   | Chain ID of the network                    | `1337`                                                          |
-| `BLOCK_TIME` | Time in seconds between mined blocks       | `0` (instant mining)                                            |
-| `ACCOUNTS`   | Number of accounts with pre-funded ETH     | `10`                                                            |
-| `BALANCE`    | Balance in wei for each pre-funded account | `1000000` (1,000,000 ETH)                                       |
-| `MNEMONIC`   | Mnemonic phrase for generating accounts    | `"test test test test test test test test test test test junk"` |
 
 ## Quick Start
 

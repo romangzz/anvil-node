@@ -1,22 +1,13 @@
-FROM rust:latest
+FROM ghcr.io/foundry-rs/foundry:latest
 
-RUN curl -L https://foundry.paradigm.xyz | bash && \
-    ~/.foundry/bin/foundryup
-
+# Set PATH so that foundry tools are accessible
 ENV PATH="/root/.foundry/bin:${PATH}"
 
-ENV CHAIN_ID=1337
-ENV BLOCK_TIME=0
-ENV ACCOUNTS=10
-ENV BALANCE=1000000
-ENV MNEMONIC="test test test test test test test test test test test junk"
-
+# Expose Anvil's default RPC port
 EXPOSE 8545
 
-CMD ["sh", "-c", "anvil --host 0.0.0.0 \
-    --chain-id ${CHAIN_ID} \
-    $( [ ${BLOCK_TIME} -gt 0 ] && echo --block-time ${BLOCK_TIME} ) \
-    --accounts ${ACCOUNTS} \
-    --balance ${BALANCE} \
-    --mnemonic \"${MNEMONIC}\""]
+# Copy the entrypoint script with execute permission
+COPY --chmod=0755 entrypoint.sh /entrypoint.sh
 
+# Use the custom entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
