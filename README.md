@@ -92,7 +92,7 @@ You can override these defaults by setting environment variables as described be
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/romanovich23/anvil-node.git
+   git clone https://github.com/romangzz/anvil.git
    cd anvil-docker
    ```
 
@@ -149,18 +149,18 @@ docker-compose up
 
 ## Docker Hub Repository
 
-You can pull the pre-built Docker image directly from [Docker Hub](https://hub.docker.com/repository/docker/romanovich23/anvil-node):
+You can pull the pre-built Docker image directly from [Docker Hub](https://hub.docker.com/repository/docker/romangzz/anvil):
 
 To use the image from Docker Hub, simply run:
 
 ```bash
-docker pull romanovich23/anvil-node
+docker pull romangzz/anvil
 ```
 
 Or use it directly in your docker run commands:
 
 ```bash
-docker run -p 8545:8545 romanovich23/anvil-node
+docker run -p 8545:8545 romangzz/anvil
 ```
 
 ## Connecting to the Node
